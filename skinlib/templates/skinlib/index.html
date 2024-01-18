@@ -1,12 +1,39 @@
-{% load django_bootstrap5 %}
-<h1>Create Image</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
 
-    {% bootstrap_form imgform %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Cancer Classifier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
 
-    {% bootstrap_button button_type="submit" content="Create" %}
+<div class="container">
+    <h1>Image Classification</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ imgform.as_p }}
 
+        <button type="submit" class="btn btn-primary">Upload and Classify</button>
+    </form>
 
+    {% if classification_result %}
+    <h2>Classification Result:</h2>
+    <p>Class: {{ classification_result.class }}</p>
+    <p>Confidence: {{ classification_result.confidence }}%</p>
+    {% endif %}
 
-</form>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-d4EDMu3XzL7XVgwoYF5M5P1F8MQPFFyo/5WKmGgRXAYjXq4YxLV7gqO6Li9NYzMtl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

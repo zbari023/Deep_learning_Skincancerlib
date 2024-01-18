@@ -29,8 +29,67 @@ def home(request):
     if request.method == 'POST':
         imgform = ImageUploadForm(request.POST, request.FILES)
         if imgform.is_valid():
+            image = imgform.save(commit=False)  # Save the form object without committing to the database yet
+            image.save()  # Save the image object to the database
+            imagefile = image.image
+
+            try:
+                fs = FileSystemStorage()
+                filename = fs.save(os.path.join(settings.MEDIA_ROOT, 'images', imagefile.name), imagefile)
+
+                image_path = os.path.join(settings.MEDIA_ROOT, 'images', imagefile.name)
+
+                target_size = (64, 64)
+                image = load_img(image_path, target_size=target_size)
+                image = img_to_array(image)
+                image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
+                image = preprocess_input(image)
+
+                predictions = CUSTOM_MODEL.predict(image)
+                class_probabilities = predictions[0]
+                class_index = np.argmax(class_probabilities)
+
+                predicted_class_name = CLASS_NAMES[class_index]
+
+
+
+                classification_result = {
+                    'class': predicted_class_name,
+                    'confidence': class_probabilities[class_index] * 100
+                }
+
+                return render(request, 'skinlib/index.html', {'classification_result': classification_result})
+
+            except Exception as e:
+                # Provide a more detailed error message
+                return render(request, 'skinlib/index.html', {'error': f'Error processing image: {str(e)}'})
+    else:
+        imgform = ImageUploadForm()
+    
+    return render(request, 'skinlib/index.html', {'imgform': imgform})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+""" def home(request):
+    if request.method == 'POST':
+        imgform = ImageUploadForm(request.POST, request.FILES)
+        if imgform.is_valid():
             imgform.save()
             return redirect('/')
     else:
         imgform = ImageUploadForm()
     return render(request,'skinlib/index.html',{'imgform': imgform})
+ """
