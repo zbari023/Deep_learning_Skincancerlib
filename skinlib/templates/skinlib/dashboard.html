@@ -1,0 +1,103 @@
+{% extends 'base.html'  %}
+{% load static %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+{% block body %}
+
+    <section id="counts" class="counts">
+        <div class="container" data-aos="fade-up">
+
+        <div class="row no-gutters">
+
+            <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+                <a href="/" class="logo me-auto"><img src="{% static 'assets/img/logo-1.jpg' %}" alt=""></a>
+            </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+                <i class="fa-solid fa-image"></i>
+                <span data-purecounter-start="0" data-purecounter-end="{{images}}" data-purecounter-duration="3" class="purecounter"></span>
+                <p><strong>Bilder</strong> ,die in Imagiolib hochgeladen wurden.</p>
+                <a href="#">Imagiolib &raquo;</a>
+            </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+                <i class="fa-solid fa-user"></i>
+                <span data-purecounter-start="0" data-purecounter-end="{{user}}" data-purecounter-duration="3" class="purecounter"></span>
+                <p><strong>Users</strong> ,die inn Imgiolib ihre Daten abgesendet haben. </p>
+                <a href="#">Imagiolib &raquo;</a>
+            </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+                <i class="fa-solid fa-message"></i>
+                <span data-purecounter-start="0" data-purecounter-end="{{contacting}}" data-purecounter-duration="3" class="purecounter"></span>
+                <p><strong>E-mails</strong> ,die zum Admin und Users geschickt sind.  </p>
+                <a href="#">Imagiolib &raquo;</a>
+            </div>
+            </div>
+
+        </div>
+
+        </div>
+    </section><!-- End Counts Section -->
+<div class="container">
+    <div class="row">
+        </div>
+        <div class="col-lg-6 col-m-6 col-sm-6 my-5 mx-auto">
+            <canvas id="myChart2"></canvas>
+    </div>
+        
+</div>
+    </div>
+</div>
+<section id="cta" class="cta">
+    <div class="container" data-aos="zoom-in">
+
+      <div class="text-center">
+
+
+      <a type="submit" class="cta-btn scrollto" href="/">zurück zu Imagiolib</a>
+      </div>
+
+    </div>
+  </section><!-- End Cta Section -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script>
+
+
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ['Users', 'Images', 'Contact'],
+        datasets: [{
+        label: '# of Votes',
+        data: ["{{user}}","{{images}}","{{contacting}}"],
+        borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true
+        }
+        }
+    }
+    });
+
+
+
+</script>
+{% endblock body %}
+
+

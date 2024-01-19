@@ -18,11 +18,16 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from skinlib.views import home
+from skinlib.views import home, dashboard , answeruser ,answerimg ,answermessage, predict
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home),
+    path('predict/',predict),
+    path('dashboard/',dashboard),                # URL path for the dashboard page  
+    path('answeruser/',answeruser),              # URL path for the answer page
+    path('answerimg/',answerimg),                # URL path for the answer page
+    path('answermessage/',answermessage),        # URL path for the answer page
 ]
 
 

@@ -1,15 +1,703 @@
+{% load static %}
+{% load django_bootstrap5 %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skin Cancer Classifier</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Skinlib</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/logo-1.png' %}" rel="icon">
+
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+
 </head>
 
-<div class="container">
+<body>
+
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+        <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
+            <div class="align-items-center d-none d-md-flex">
+                <i class="bi bi-clock"></i> Montag - Freitag, 00:08 bis 20:00
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-phone"></i> Rufnummer: {{company_data.call_us}}
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <a href="/" class="logo me-auto"><img src="{% static 'assets/img/logo-1.png' %}" alt=""></a>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#doctors">Hautkrebs</a></li>
+                    <li><a class="nav-link scrollto" href="#appointment">Benutzerdaten</a></li>
+                    <li><a class="nav-link scrollto" href="#about">ÜBER UNS</a></li>
+                    <li><a class="nav-link scrollto" href="#contact">Kontakt</a></li>
+                    <li><a class="nav-link scrollto" href="/dashboard">Dashboard</a></li>
+
+
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+
+
+        </div>
+    </header><!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+            <div class="carousel-inner" role="listbox">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active"
+                    style="background-image: url({% static 'assets/img/Medical-Derm-SKIN-CANCER-SCREENING.jpg' %})">
+                    <div class="container">
+                        <h2>Willkommen in <span>Skinlib</span></h2>
+                        <h5>
+
+                            Deep Learning-Modell für Bilderkennung mit Tensorflow und Keras.
+
+                            Dieses Deep Learning-Modell ermöglicht die Bilderkennung von den verschieden
+                            Hautkrebsarten mithilfe von Python-Bibliotheken. Das Modell wurde als Faltungsneuronale Netzwerk für 
+                            die Hautkrebsbilderklassifikation aufgebaut.
+
+                        </h5>
+                        <a href="#about" class="btn-get-started scrollto">Mehr</a>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url({% static 'assets/img/malo.jpg' %}">
+                    <div class="container">
+                        <h2>Willkommen in <span>Skinlib</span></h2>
+                        <h5>
+                            Deep Learning-Modell für Bilderkennung mit Tensorflow und Keras.
+
+                            Dieses Deep Learning-Modell ermöglicht die Bilderkennung von den verschieden
+                            Hautkrebsarten mithilfe von Python-Bibliotheken. Das Modell wurde als Faltungsneuronale Netzwerk für 
+                            die Hautkrebsbilderklassifikation aufgebaut.
+
+                        </h5>
+                        <a href="#about" class="btn-get-started scrollto">Mehr</a>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item" style="background-image: url({% static 'assets/img/1_W4ingFGnCfqla_4tXHtmcA.png' %})">
+                    <div class="container">
+                        <h2>Willkommen in <span>Skinlib</span></h2>
+                        <h5>
+                            Deep Learning-Modell für Bilderkennung mit Tensorflow und Keras.
+
+                            Dieses Deep Learning-Modell ermöglicht die Bilderkennung von den verschieden
+                            Hautkrebsarten mithilfe von Python-Bibliotheken. Das Modell wurde als Faltungsneuronale Netzwerk für 
+                            die Hautkrebsbilderklassifikation aufgebaut.
+
+                        </h5>
+                        <a href="#about" class="btn-get-started scrollto">Mehr</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+            </a>
+
+        </div>
+    </section><!-- End Hero -->
+
+    <main id="main">
+        <section id="counts" class="counts">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row no-gutters">
+
+
+                    <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
+                        <div class="count-box">
+                            <i class="fa-solid fa-image"></i>
+                            <span data-purecounter-start="0" data-purecounter-end="{{images}}"
+                                data-purecounter-duration="3" class="purecounter"></span>
+                            <p><strong>Bilder</strong> ,die in Skinlib hochgeladen wurden.</p>
+                            <a href="#">Skinlib &raquo;</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
+                        <div class="count-box">
+                            <i class="fa-solid fa-user"></i>
+                            <span data-purecounter-start="0" data-purecounter-end="{{user}}"
+                                data-purecounter-duration="3" class="purecounter"></span>
+                            <p><strong>Users</strong> ,die in Skinlib ihre Daten abgesendet haben. </p>
+                            <a href="#">Skinlib &raquo;</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
+                        <div class="count-box">
+                            <i class="fa-solid fa-message"></i>
+                            <span data-purecounter-start="0" data-purecounter-end="{{contacting}}"
+                                data-purecounter-duration="3" class="purecounter"></span>
+                            <p><strong>E-mails</strong> ,die zum Admin und Users geschickt sind.</p>
+                            <a href="#">Skinlib &raquo;</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Counts Section -->
+        <!-- ======= About Us Section ======= -->
+        <section id="doctors" class="doctors section-bg"><!-- ======= Doctors Section ======= -->
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Geräte</h2>
+                    <p>
+                        Die Radiographie ist ein bewährtes und weit verbreitetes Verfahren in der medizinischen
+                        Bildgebung. Sie ermöglicht Ärzten eine schnelle und effektive Diagnosestellung und unterstützt
+                        sie bei der Planung geeigneter Behandlungsansätze.</p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="100">
+                            <div class="member-img">
+                                <img src="{% static 'assets/img/mri-2813911_640.jpg' %}" class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href="https://de.wikipedia.org/wiki/Magnetresonanztomographie"><i
+                                            class="fa-brands fa-google"></i></a>
+
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>Magnetresonanztomographie</h4>
+                                <span>(MRI)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="200">
+                            <div class="member-img">
+                                <img src="{% static 'assets/img/hospital-3098683_640.jpg' %}" class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href="https://de.wikipedia.org/wiki/Computertomographie"><i
+                                            class="fa-brands fa-google"></i></a>
+
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>Computertomographie</h4>
+                                <span>(CT)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="300">
+                            <div class="member-img">
+                                <img src="{% static 'assets/img/th.jpeg' %}" class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href="https://de.wikipedia.org/wiki/Positronen-Emissions-Tomographie"><i
+                                            class="fa-brands fa-google"></i></a>
+
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>Positronen-Emissions-Tomographie</h4>
+                                <span>(pet/ct)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="400">
+                            <div class="member-img">
+                                <img src="{% static 'assets/img/th (1).jpeg' %}" class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href="https://de.wikipedia.org/wiki/Einzelphotonen-Emissionscomputertomographie"><i
+                                            class="fa-brands fa-google"></i></a>
+
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>Einzelphotonen-Emissionscomputertomographie</h4>
+                                <span>(spect/ct)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Doctors Section -->
+
+
+
+
+
+        <!-- ======= Gallery Section ======= -->
+        <section id="gallery" class="gallery">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Bildgebung</h2>
+                    <p>Medizinische Bildgebung verbindet deine Kenntnisse über die Anatomie des Menschen mit der
+                        klinischen Praxis. Die medizinische Bildgebung umfasst mehrere nichtinvasive bildgebende
+                        Verfahren, die die inneren Strukturen des Körpers darstellen können.
+                    <h3>Hier sind Beispielbilder:</h3>
+                    </p>
+                </div>
+
+                <div class="gallery-slider swiper">
+                    <div class="swiper-wrapper align-items-center">
+                        <div class="swiper-slide"><a class="gallery-lightbox"
+                                href="{% static 'assets/img/1.jpeg' %}"><img src="{% static 'assets/img/1.jpeg' %}"
+                                    class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="gallery-lightbox"
+                                href="{% static 'assets/img/2.jpeg' %}"><img src="{% static 'assets/img/2.jpeg' %}"
+                                    class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="gallery-lightbox"
+                                href="{% static 'assets/img/3.jpeg' %}"><img src="{% static 'assets/img/3.jpeg' %}"
+                                    class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="gallery-lightbox"
+                                href="{% static 'assets/img/4.jpeg' %}"><img src="{% static 'assets/img/4.jpeg' %}"
+                                    class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="gallery-lightbox"
+                                href="{% static 'assets/img/6 (1).jpeg' %}"><img
+                                    src="{% static 'assets/img/6 (1).jpeg' %}" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="gallery-lightbox"
+                                href="{% static 'assets/img/6 (2).jpeg' %}"><img
+                                    src="{% static 'assets/img/6 (2).jpeg' %}" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="gallery-lightbox"
+                                href="{% static 'assets/img/6 (1).png' %}"><img
+                                    src="{% static 'assets/img/6 (1).png' %}" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="gallery-lightbox"
+                                href="{% static 'assets/img/7.jpeg' %}"><img src="{% static 'assets/img/7.jpeg' %}"
+                                    class="img-fluid" alt=""></a></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+        </section><!-- End Gallery Section -->
+        <!-- ======= Featured Services Section ======= -->
+        <section id="featured-services" class="featured-services">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon"><i class="fa-solid fa-user"></i></div>
+                            <h4 class="title"><a href="#appointment">Ihre Daten </a></h4>
+                            <p class="description">Geben Sie bitte Ihren Namen , Ihre E-mail Addresse und die
+                                Telephonnummer ein.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon"><i class="fa-solid fa-image"></i></div>
+                            <h4 class="title"><a href="#appointment">Bild auswählen</a></h4>
+                            <p class="description">Wählen Sie bitte Ihr medizinisches Bild aus Ihrem PC aus.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                            <div class="icon"><i class="fa-solid fa-upload"></i></div>
+                            <h4 class="title"><a href="#appointment">Bild Hochladen</a></h4>
+                            <p class="description">Öffnen Sie bitte das ausgewähltes Bild aus Ihrem PC.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                            <div class="icon"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                            <h4 class="title"><a href="#appointment">Das Ergebnis</a></h4>
+                            <p class="description">Wenn Sie das Bild hochgeladen haben, dann sehen Sie es und das
+                                Ergebnis.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Featured Services Section -->
+
+        <section id="appointment" class="appointment section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Benutzerdaten</h2>
+                    <p>
+                        Bitte füllen Sie das folgende Daten aus. Wir benötigen Ihren Namen, Ihre E-Mail-Adresse und Ihre
+                        Telefonnummer. Sobald Sie das Formular ausgefüllt haben, klicken Sie bitte auf die Schaltfläche
+                        'Absenden', um Ihre Daten an uns zu senden. Wir werden Ihre Daten vertraulich behandeln und nur
+                        für den Zweck verwenden.</p>
+                </div>
+                <div class="col-lg-6 mx-auto">
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Über uns</h2>
+                    <h5>🤖🔍📷 Machine-Learning-Modell 🌟🚀
+
+                        .Mit diesem Machine-Learning-Modell können Sie Ihr medizinisches Bild hochladen und Vorhersagen
+                        erhalten. 📷🔍💡 Das Modell wurde mit Teachable Machine erstellt.</h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <img src="{% static 'assets/img/machine-learning-tumor-detection.jpg' %}" class="img-fluid"
+                            alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+                        <h3>So funktioniert es:</h3>
+                        <p class="fst-italic">
+
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i>Laden Sie ein Bild hoch.</li>
+                            <li><i class="bi bi-check-circle"></i> Das Modell analysiert das Bild und gibt eine
+                                Vorhersage aus.</li>
+                            <li><i class="bi bi-check-circle"></i> Die Vorhersage wird als Prozentsatz und
+                                Klassifizierung angezeigt.</li>
+                        </ul>
+                        <p>
+                            Probieren Sie es aus und entdecken Sie die Möglichkeiten der maschinellen Bilderkennung!
+                            🚀💭🔬
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Us Section -->
+        <section id="cta" class="cta">
+            <div class="container" data-aos="zoom-in">
+
+                <div class="text-center">
+                    <h3>Probieren Sie jetzt das Modell aus</h3>
+                    <h5> In der medizinischen Bilderklassifikation wurde das Teachable Machine Learning Modell speziell
+                        entwickelt,
+                        um zwischen verschiedenen medizinischen Bildern wie MRI, CT, PET/CT, PET/MRI und SPECT/CT zu
+                        unterscheiden.</h5>
+                    <p>Senden Sie bitte anschließend das Ergebniss. Das hilft uns, das Modell hochmodern und intelligent
+                        weiterzuarbeiten. </p>
+                    <a type="submit" class="cta-btn scrollto" href="#about">wie das Modell genau funktioniert</a>
+                </div>
+
+            </div>
+        </section><!-- End Cta Section -->
+
+
+        <!-- ======= Features Section ======= -->
+        <section id="features" class="features">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row">
+                    <div class="col-lg-6 order-2 order-lg-1 my-4" data-aos="fade-right">
+
+
+                    </div>
+                    <div class="image img-fluid col-lg-6 order-1 order-lg-2 my-4" style='background-image: url("");'
+                        data-aos="zoom-in"></div>
+                </div>
+
+            </div>
+        </section><!-- End Features Section -->
+
+
+
+
+        <!-- ======= Pricing Section ======= -->
+        <section id="pricing" class="pricing">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Kosten</h2>
+                    <p>Es ist komplett kostenlos!. Entdecken Sie unsere großartige kostenlose Option! Mit unserem
+                        Free-Paket erhalten Sie unbegrenzten und kostenlosen Zugang zu allen Funktionen unserer
+                        Plattform</p>
+                </div>
+
+                <div class="row">
+
+
+
+                    <div class="col-lg-3 col-md-6 mt-4 mt-md-0 mx-auto">
+                        <div class="box featured" data-aos="fade-up" data-aos-delay="200">
+                            <h3>Free</h3>
+                            <h4><sup>$</sup>0<span> / monatlich</span></h4>
+                            <ul>
+                                <li>Unbegrenzter und kostenloser Zugang zu allen Funktionen</li>
+                                <li>Kostenlose Updates und Wartung</li>
+                                <li>Vollständige Verfügbarkeit</li>
+                                <li class="na">Premium</li>
+                            </ul>
+                            <div class="btn-wrap">
+                                <a href="/#about" class="btn-buy">Jetzt kostenlos nutzen</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </section><!-- End Pricing Section -->
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Kontakt</h2>
+                    <p>
+                        Unser Kontaktformular bietet Ihnen die Möglichkeit, direkt und unkompliziert mit uns in
+                        Verbindung zu treten. Egal, ob Sie Fragen zu unseren Modell, Informationen zu unsere Webseite
+                        oder individuelle Anfragen haben - zögern Sie nicht, uns zu kontaktieren.</p>
+                </div>
+
+            </div>
+
+            <div>
+                <iframe style="border:0; width: 100%; height: 350px;"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28669.930194708482!2d7.254944658804903!3d50.56973256468496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bef0f1372033c7%3A0x26434e4b068d89dc!2sHochschule%20Koblenz%20-%20Standort%20RheinAhrCampus!5e0!3m2!1sar!2sde!4v1697662052590!5m2!1sar!2sde"
+                    frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div class="container">
+
+                <div class="row mt-5">
+
+                    <div class="col-lg-6 mx-auto my-5">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="info-box">
+                                    <i class="bx bx-map"></i>
+                                    <h3>Unsere Addresse</h3>
+                                    <p>{{company_data.address}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4">
+                                    <i class="bx bx-envelope"></i>
+                                    <h3>Email uns</h3>
+                                    <p>{{company_data.email_us}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4">
+                                    <i class="bx bx-phone-call"></i>
+                                    <h3>Call uns</h3>
+                                    <p>{{company_data.call_us}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 mx-auto my-5">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Contact Section -->
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 mx-auto">
+                        <div class="footer-info">
+                            <h3>{{company_data.name}}</h3>
+                            <p>
+                            <h5>Unsere Addresse:</h5>
+
+                            {{company_data.address}} <br>
+                            <strong>Phone:</strong> {{company_data.call_us}}<br>
+                            <strong>Email:</strong> {{company_data.email_us}}<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="https://github.com/zbari023" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="https://github.com/zbari023" class="facebook"><i
+                                        class="bx bxl-facebook"></i></a>
+                                <a href="https://github.com/zbari023" class="instagram"><i
+                                        class="bx bxl-instagram"></i></a>
+                                <a href="https://github.com/zbari023" class="google-plus"><i
+                                        class="bx bxl-skype"></i></a>
+                                <a href="https://github.com/zbari023" class="linkedin"><i
+                                        class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 mx-auto footer-links">
+                        <h4>Hilfreiche Linken</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#doctors">Geräte</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#contact">Kontakt</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/dashboard">Dashboard</a></li>
+
+
+                        </ul>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-6 mx-auto footer-newsletter">
+                        <h4>Github <i class="fa-brands fa-github"></i></h4>
+                        <p>Für mehr Projekten in Django und Fronend klicken Sie <a
+                                href="https://github.com/zbari023">hier</a></p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>{{company_data.name}}</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://github.com/zbari023">Ziad Bari</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
     <h1>Image Classification</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -29,11 +717,4 @@
         {{ error }}
     </div>
     {% endif %}
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-d4EDMu3XzL7XVgwoYF5M5P1F8MQPFFyo/5WKmGgRXAYjXq4YxLV7gqO6Li9NYzMtl"
-    crossorigin="anonymous"></script>
-</body>
-
-</html>
+</div>  -->
