@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from .forms import NameuploadForm, ImageUploadForm ,ContactForm
-from .models import Image, UserData ,Contact
+from .forms import NameuploadForm ,ContactForm
+from .models import  UserData ,Contact, Prediction
 from django.core.files.storage import FileSystemStorage
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.efficientnet import preprocess_input
@@ -46,12 +46,13 @@ def predict(request):
 
             predicted_class_name = CLASS_NAMES[class_index]
 
-            classification_result = {
-                'class': predicted_class_name,
-                'confidence': class_probabilities[class_index] * 100
-            }
-
-            return render(request, 'skinlib/predict.html', {'classification_result': classification_result})
+            prediction_obj = Prediction(
+                image=imagefile,
+                predicted_class=predicted_class_name,
+                confidence=class_probabilities[class_index] * 100
+            )
+            prediction_obj.save()
+            return render(request, 'skinlib/predict.html', {'prediction_obj': prediction_obj})
 
         except Exception as e:
             # Provide a more detailed error message
@@ -62,11 +63,11 @@ def predict(request):
 
 
 def home(request):
-    images = Image.objects.all().count()       # given the counter of the images in the project
+    images = Prediction.objects.all().count()       # given the counter of the images in the project
     user = UserData.objects.all().count()      # given the counter of the users in the project
     contacting = Contact.objects.all().count() # given the counter of the contacting in the project
-    if Image.objects.exists():                 # to display just the current image in html
-        image = Image.objects.latest('id')
+    if Prediction.objects.exists():                 # to display just the current image in html
+        image = Prediction.objects.latest('id')
         context = {'image': image}
     else:
         context = {'image': None}
@@ -82,7 +83,6 @@ def home(request):
             return redirect('answermessage/')  
     else:
         form = NameuploadForm()
-        imgform = ImageUploadForm()
         eform = ContactForm()
     # sending the data with the context proccessor to html 
     context.update({'form': form,'eform': eform,'images':images ,'user': user ,'contacting': contacting })
@@ -94,7 +94,7 @@ def home(request):
 
 # make the dashboard function data 
 def dashboard(request):
-    images = Image.objects.all().count()
+    images = Prediction.objects.all().count()
     user = UserData.objects.all().count()
     contacting = Contact.objects.all().count()
     return render(request,'skinlib/dashboard.html',{
@@ -105,7 +105,7 @@ def dashboard(request):
     
 # create the answer page for making sure, that the user his data is uploaded
 def answeruser(request):
-    images = Image.objects.all().count()
+    images = Prediction.objects.all().count()
     user = UserData.objects.all().count()
     contacting = Contact.objects.all().count()
     return render(request,'skinlib/answeruser.html',{
@@ -116,7 +116,7 @@ def answeruser(request):
     
 # create the answer page for making sure, that the user his data is uploaded
 def answerimg(request):
-    images = Image.objects.all().count()
+    images = Prediction.objects.all().count()
     user = UserData.objects.all().count()
     contacting = Contact.objects.all().count()
     return render(request,'skinlib/answerimg.html',{
@@ -126,7 +126,7 @@ def answerimg(request):
     })
 # create the answer page for making sure, that the user his data is uploaded
 def answermessage(request):
-    images = Image.objects.all().count()
+    images = Prediction.objects.all().count()
     user = UserData.objects.all().count()
     contacting = Contact.objects.all().count()
     return render(request,'skinlib/answermessage.html',{

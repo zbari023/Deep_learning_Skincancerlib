@@ -1,37 +1,46 @@
+<!-- skinlib/templates/skinlib/predict.html -->
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skin Cancer Classifier</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Image Classification</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+<body>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Skin Cancer Classifier</h1>
+<div class="container mt-5">
+    <h2 class="mb-4">Image Classification</h2>
 
-        <form method="POST" enctype="multipart/form-data" >
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="imagefile" class="form-label">Choose an image file:</label>
-                <input type="file" class="form-control" id="imagefile" name="imagefile" accept="image/*">
-            </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="imagefile">Upload Image:</label>
+            <input type="file" name="imagefile" class="form-control-file" accept="image/*" required>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Predict</button>
-        </form>
+        <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
 
-        {% if classification_result %}
-            <div class="mt-4">
-                <p class="fw-bold">Classification Result:</p>
-                <p><span class="fw-bold">Class:</span> {{ classification_result.class }}</p>
-                <p><span class="fw-bold">Confidence:</span> {{ classification_result.confidence }}%</p>
-            </div>
-        {% endif %}
-    </div>
+    {% if prediction_obj %}
+        <div class="mt-4">
+            <h4>Prediction Result:</h4>
+            <p>Class: {{ prediction_obj.predicted_class}}</p>
+            <p>Confidence: {{ prediction_obj.confidence|floatformat:2 }}%</p>
+        </div>
+    {% endif %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-d4EDMu3XzL7XVgwoYF5M5P1F8MQPFFyo/5WKmGgRXAYjXq4YxLV7gqO6Li9NYzMtl" crossorigin="anonymous"></script>
+    {% if error %}
+        <div class="mt-4 alert alert-danger">
+            <strong>Error:</strong> {{ error }}
+        </div>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
-
 </html>

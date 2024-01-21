@@ -38,8 +38,11 @@ class Contact(models.Model):
     def __str__(self):
         return self.email
 
-# Models class for the uploaded image with his result
-class Image(models.Model):
-    image = models.ImageField(upload_to='skinlib')
+# Models class for the uploaded image with his result  
+class Prediction(models.Model):
+    image = models.ImageField(upload_to='skinlib/')
+    predicted_class = models.CharField(max_length=255)
+    confidence = models.FloatField()
+
     def __str__(self):
-        return self.image.name
+        return f"{self.predicted_class} - {self.confidence}%"

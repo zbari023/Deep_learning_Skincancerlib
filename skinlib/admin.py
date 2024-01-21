@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Company,Image,UserData, Contact
+from .models import Company,UserData, Contact, Prediction
 # Register your models here.
 class UserDataAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'telefonnummer']
@@ -12,7 +12,8 @@ class PostAdmin(admin.ModelAdmin):
 class ContactDataAdmin(admin.ModelAdmin):
     list_display = ['name', 'email']
 
-admin.site.register(Image ,PostAdmin)        
+
 admin.site.register(Company)
+admin.site.register(Prediction,PostAdmin)
 admin.site.register(UserData,UserDataAdmin)
 admin.site.register(Contact,ContactDataAdmin)
