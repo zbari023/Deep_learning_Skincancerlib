@@ -62,8 +62,8 @@
                 <ul>
                     <li><a class="nav-link scrollto" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#doctors">Hautkrebs</a></li>
+                    <li><a class="nav-link scrollto" href="#about">Anweisungen</a></li>
                     <li><a class="nav-link scrollto" href="#appointment">Benutzerdaten</a></li>
-                    <li><a class="nav-link scrollto" href="#about">ÜBER UNS</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Kontakt</a></li>
                     <li><a class="nav-link scrollto" href="/dashboard">Dashboard</a></li>
 
@@ -288,11 +288,10 @@
 
                 <div class="section-title">
                     <h2>Hautkrebsbildern</h2>
-                    <p> Verwenden Sie eine gute Kamera oder ein Smartphone mit hoher Auflösung, um klare und detaillierte Bilder zu erhalten.
+                    <h5> Verwenden Sie eine gute Kamera oder ein Smartphone mit hoher Auflösung, um klare und detaillierte Bilder zu erhalten.
                         Achten Sie darauf, dass Ihre Bilder ausreichend beleuchtet sind und die Hautveränderungen deutlich sichtbar sind. 
-                        Bei Bedarf können Sie den Zoom verwenden, um bestimmte Merkmale oder Details besser darzustellen.
-                        Beachten Sie, dass das Hochladen von Bildern Ihre Privatsphäre beeinträchtigen kann. Überprüfen Sie daher vorher die Datenschutzbestimmungen
-                        der Plattform, um sicherzustellen, dass Ihre Informationen geschützt sind.
+                        Bei Bedarf können Sie den Zoom verwenden, um bestimmte Merkmale oder Details besser darzustellen. <br>
+                        Fotografieren Sie den Verdachtsbereich und verwenden Sie einen Größenreferenzpunkt. <br>
 
 
 
@@ -300,7 +299,7 @@
                                         Bilderbeispiele:
                                     </h3>
                     
-                    </p>
+                                </h5>
                 </div>
 
                 <div class="gallery-slider swiper">
@@ -335,6 +334,44 @@
 
             </div>
         </section><!-- End Gallery Section -->
+
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Anweisungen</h2>
+                    <h5>🤖🔍📷 Deep-Learning-Modell🌟🚀
+
+                        .Mit diesem Deep-Learning-Modell können Sie Ihr Hautbild hochladen und Vorhersagen
+                        erhalten. 📷🔍💡 Das Modell wurde mit Tensorflow uns Keras erstellt.</h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <img src="{% static 'assets/img/skingoogle.jpeg' %}" class="img-fluid"
+                            alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+                        <h3>So funktioniert es:</h3>
+                        <p class="fst-italic">
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i>Laden Sie Ihr Hautbild hoch.</li>
+                            <li><i class="bi bi-check-circle"></i> Das Modell analysiert das Bild und gibt eine
+                                Vorhersage aus.</li>
+                            <li><i class="bi bi-check-circle"></i> Die Vorhersage wird als Prozentsatz und
+                                Klassifizierung-Hautkrebsart angezeigt.</li>
+                                
+                        </ul>
+                        <p>
+                            Probieren Sie es aus und entdecken Sie die Möglichkeiten der maschinellen Bilderkennung!
+                            🚀💭🔬
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Us Section -->
         <!-- ======= Featured Services Section ======= -->
         <section id="featured-services" class="featured-services">
             <div class="container" data-aos="fade-up">
@@ -353,7 +390,7 @@
                         <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                             <div class="icon"><i class="fa-solid fa-image"></i></div>
                             <h4 class="title"><a href="#appointment">Bild auswählen</a></h4>
-                            <p class="description">Wählen Sie bitte Ihr medizinisches Bild aus Ihrem PC aus.</p>
+                            <p class="description">Wählen Sie bitte Ihr medizinisches Bild oder Fotografieren Sie den Verdachtsbereich.</p>
                         </div>
                     </div>
 
@@ -361,7 +398,7 @@
                         <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
                             <div class="icon"><i class="fa-solid fa-upload"></i></div>
                             <h4 class="title"><a href="#appointment">Bild Hochladen</a></h4>
-                            <p class="description">Öffnen Sie bitte das ausgewähltes Bild aus Ihrem PC.</p>
+                            <p class="description">Laden Sie bitte das ausgewähltes Hautbild aus Ihrem PC oder Smartphone hoch.</p>
                         </div>
                     </div>
 
@@ -391,49 +428,17 @@
                         für den Zweck verwenden.</p>
                 </div>
                 <div class="col-lg-6 mx-auto">
-
+                    <form method="post" enctype="multipart/form-data" class="col-md-12 form-group mt-3 mt-md-12" data-aos="fade-up" data-aos-delay="100">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% bootstrap_button button_type="submit" content="Absenden" extra_classes="appointment-btn mt-3" %}
+                    </form>
                 </div>
             </div>
         </section>
 
 
-        <section id="about" class="about">
-            <div class="container" data-aos="fade-up">
 
-                <div class="section-title">
-                    <h2>Über uns</h2>
-                    <h5>🤖🔍📷 Machine-Learning-Modell 🌟🚀
-
-                        .Mit diesem Machine-Learning-Modell können Sie Ihr medizinisches Bild hochladen und Vorhersagen
-                        erhalten. 📷🔍💡 Das Modell wurde mit Teachable Machine erstellt.</h5>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6" data-aos="fade-right">
-                        <img src="{% static 'assets/img/machine-learning-tumor-detection.jpg' %}" class="img-fluid"
-                            alt="">
-                    </div>
-                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-                        <h3>So funktioniert es:</h3>
-                        <p class="fst-italic">
-
-                        </p>
-                        <ul>
-                            <li><i class="bi bi-check-circle"></i>Laden Sie ein Bild hoch.</li>
-                            <li><i class="bi bi-check-circle"></i> Das Modell analysiert das Bild und gibt eine
-                                Vorhersage aus.</li>
-                            <li><i class="bi bi-check-circle"></i> Die Vorhersage wird als Prozentsatz und
-                                Klassifizierung angezeigt.</li>
-                        </ul>
-                        <p>
-                            Probieren Sie es aus und entdecken Sie die Möglichkeiten der maschinellen Bilderkennung!
-                            🚀💭🔬
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </section><!-- End About Us Section -->
         <section id="cta" class="cta">
             <div class="container" data-aos="zoom-in">
 
