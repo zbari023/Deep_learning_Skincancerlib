@@ -421,11 +421,11 @@
 
                 <div class="section-title">
                     <h2>Skinlib Modell für Hautbilder</h2>
-                    <h6>
+                    <h5>
                         Bitte füllen Sie das folgende Daten aus. Wir benötigen Ihren Namen, Ihre E-Mail-Adresse und Ihre
                         Telefonnummer. Sobald Sie das Formular ausgefüllt haben, klicken Sie bitte auf die Schaltfläche
                         'Absenden', um Ihre Daten an uns zu senden. Wir werden Ihre Daten vertraulich behandeln und nur
-                        für den Zweck verwenden.</h6>
+                        für den Zweck verwenden.</h5>
                 </div>
                 <div class="col-lg-6 mx-auto">
                     <form method="post" enctype="multipart/form-data" class="col-md-12 form-group mt-3 mt-md-12" data-aos="fade-up" data-aos-delay="100">
@@ -469,9 +469,9 @@
 
                 <div class="section-title">
                     <h2>Kosten</h2>
-                    <p>Es ist komplett kostenlos!. Entdecken Sie unsere großartige kostenlose Option! Mit unserem
+                    <h5>Es ist komplett kostenlos!. Entdecken Sie unsere großartige kostenlose Option! Mit unserem
                         Free-Paket erhalten Sie unbegrenzten und kostenlosen Zugang zu allen Funktionen unserer
-                        Plattform</p>
+                        Plattform</h5>
                 </div>
 
                 <div class="row">
@@ -489,7 +489,7 @@
                                 <li class="na">Premium</li>
                             </ul>
                             <div class="btn-wrap">
-                                <a href="/#about" class="btn-buy">Jetzt kostenlos nutzen</a>
+                                <a href="/predict" class="btn-buy">Jetzt kostenlos nutzen</a>
                             </div>
                         </div>
                     </div>
@@ -506,10 +506,10 @@
 
                 <div class="section-title">
                     <h2>Kontakt</h2>
-                    <p>
+                    <h5>
                         Unser Kontaktformular bietet Ihnen die Möglichkeit, direkt und unkompliziert mit uns in
                         Verbindung zu treten. Egal, ob Sie Fragen zu unseren Modell, Informationen zu unsere Webseite
-                        oder individuelle Anfragen haben - zögern Sie nicht, uns zu kontaktieren.</p>
+                        oder individuelle Anfragen haben - zögern Sie nicht, uns zu kontaktieren.</h5>
                 </div>
 
             </div>
@@ -531,21 +531,21 @@
                                 <div class="info-box">
                                     <i class="bx bx-map"></i>
                                     <h3>Unsere Addresse</h3>
-                                    <p>{{company_data.address}}</p>
+                                    <h6>{{company_data.address}}</h6>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="info-box mt-4">
                                     <i class="bx bx-envelope"></i>
                                     <h3>Email uns</h3>
-                                    <p>{{company_data.email_us}}</p>
+                                    <h6>{{company_data.email_us}}</h6>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="info-box mt-4">
                                     <i class="bx bx-phone-call"></i>
                                     <h3>Call uns</h3>
-                                    <p>{{company_data.call_us}}</p>
+                                    <h6>{{company_data.call_us}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -553,7 +553,11 @@
                     </div>
 
                     <div class="col-lg-6 mx-auto my-5">
-
+                        <form method="post" >
+                            {% csrf_token %}
+                            {% bootstrap_form eform %}
+                            {% bootstrap_button button_type="submit" content="Absenden" extra_classes="appointment-btn mt-3" %}
+                        </form>
                     </div>
 
                 </div>
@@ -597,12 +601,11 @@
                         <h4>Hilfreiche Linken</h4>
                         <ul>
                             <li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#doctors">Geräte</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#doctors">Hautkrebs</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#about">Anweisungen</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#appointment">Skinlib-Modell</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#contact">Kontakt</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="/dashboard">Dashboard</a></li>
-
-
                         </ul>
                     </div>
 

@@ -51,7 +51,9 @@ def predict(request):
                 predicted_class=predicted_class_name,
                 confidence=class_probabilities[class_index] * 100
             )
+            
             prediction_obj.save()
+            
             return render(request, 'skinlib/predict.html', {'prediction_obj': prediction_obj})
 
         except Exception as e:
