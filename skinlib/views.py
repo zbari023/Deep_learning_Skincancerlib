@@ -65,10 +65,10 @@ def predict(request):
 
 
 def home(request):
-    images = Prediction.objects.all().count()       # given the counter of the images in the project
+    images = Prediction.objects.all().count()  # given the counter of the images in the project
     user = UserData.objects.all().count()      # given the counter of the users in the project
     contacting = Contact.objects.all().count() # given the counter of the contacting in the project
-    if Prediction.objects.exists():                 # to display just the current image in html
+    if Prediction.objects.exists():            # to display just the current image in html
         image = Prediction.objects.latest('id')
         context = {'image': image}
     else:
@@ -79,7 +79,7 @@ def home(request):
         eform = ContactForm(request.POST)      # gitting the request data from the form-class, which content the contact data
         if form.is_valid():
             form.save()                        # saving the request data in db
-            return redirect('answeruser/')         # Redirect to a page to make sure for the user, that his image is uploaded
+            return redirect('answeruser/')     # Redirect to a page to make sure for the user, that his image is uploaded
         if eform.is_valid(): 
             eform.save()
             return redirect('answermessage/')  
