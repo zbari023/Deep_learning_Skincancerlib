@@ -1,9 +1,13 @@
+# Hier werden alle benötigten Bibliotheken und Module importiert.
+# Darunter sind Django-spezifische, Modelle, Formulare, Dateispeicherung, TensorFlow-Funktionen usw.
+
 from django.shortcuts import render, redirect
 from django.conf import settings
 from .forms import NameuploadForm ,ContactForm
 from .models import  UserData ,Contact, Prediction
 from django.core.files.storage import FileSystemStorage
-from tensorflow.keras.preprocessing.image import load_img, img_to_array
+# Tensorflow-Bibliothek muss in der virtuelles Umgebebung mit dem Befehl 'pip install tensorflow' installiert
+from tensorflow.keras.preprocessing.image import load_img, img_to_array 
 from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras.models import load_model
 import os
@@ -11,55 +15,50 @@ import numpy as np
 from pathlib import Path
 # Create your views here.
 
-# Define constants
+# Definieren des CNN_Modellpfads. skinlib-CNN-Modells wird in der src/cnnmodell gespeichert.
 BASE_DIR = Path(settings.BASE_DIR)
 MODEL_PATH = str(BASE_DIR / 'cnnmodell' / 'skin_cancer_model_multible_classifier.h5')
+# Definieren  der Hautkrebsklassennamen
 CLASS_NAMES = [
     'Actinic keratosis', 'Basal cell carcinoma', 'Benign keratosis', 'Dermatofibroma',
     'Melanocytic nevus', 'Melanoma', 'Squamous cell carcinoma', 'Vascular lesion'
 ]
 
-# Load the model outside of the view function
+# Laden des CNN-Modells
 CUSTOM_MODEL = load_model(MODEL_PATH)
-
-
-
+# predict-Funktion wird aufgerufen, wenn ein Benutzer eine Vorhersage für sein hochgeladenes Hautbild machen möchte.
 
 def predict(request):
     if request.method == 'POST' and 'imagefile' in request.FILES:
         try:
+            # Hochgeladenes Bild wird erhalten und gespeichert
             imagefile = request.FILES['imagefile']
             fs = FileSystemStorage()
             filename = fs.save(os.path.join(settings.MEDIA_ROOT, 'images', imagefile.name), imagefile)
-
             image_path = os.path.join(settings.MEDIA_ROOT, 'images', imagefile.name)
-
+            # Bild wird geladen und vorverarbeitet, um es für das Modell vorzubereiten
             target_size = (64, 64)
             image = load_img(image_path, target_size=target_size)
             image = img_to_array(image)
             image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
             image = preprocess_input(image)
-
+            # Vorhersage mit dem geladenen Modell wird durchgeführt
             predictions = CUSTOM_MODEL.predict(image)
             class_probabilities = predictions[0]
             class_index = np.argmax(class_probabilities)
-
             predicted_class_name = CLASS_NAMES[class_index]
-
+            # Die Vorhersage wird in der Datenbank gespeichert
             prediction_obj = Prediction(
                 image=imagefile,
                 predicted_class=predicted_class_name,
                 confidence=class_probabilities[class_index] * 100
             )
-            
             prediction_obj.save()
-            
+            # Das Ergebnis wird dem Benutzer angezeigt
             return render(request, 'skinlib/predict.html', {'prediction_obj': prediction_obj})
-
         except Exception as e:
-            # Provide a more detailed error message
+            # Fehlerbehandlung, falls ein Fehler auftritt
             return render(request, 'skinlib/predict.html', {'error': f'Error processing image: {str(e)}'})
-
     return render(request, 'skinlib/predict.html', {'error': 'No file part'})
 
 

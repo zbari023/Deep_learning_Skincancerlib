@@ -97,6 +97,7 @@
 
 
 </section>
+<!-- Ein JS code, das hochgeladenes Bild in einem col anzuzeigen-->
 <script>
     function displayImage(input) {
         var file = input.files[0];
@@ -121,30 +122,3 @@
 
 {% endblock body %}
 
-<!-- <div class="container mt-5">
-    <h2 class="mb-4">Image Classification</h2>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="imagefile">Upload Image:</label>
-            <input type="file" name="imagefile" class="form-control-file" accept="image/*" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Predict</button>
-    </form>
-
-    {% if prediction_obj %}
-    <div class="mt-4">
-        <h4>Prediction Result:</h4>
-        <p>Class: {{ prediction_obj.predicted_class}}</p>
-        <p>Confidence: {{ prediction_obj.confidence|floatformat:2 }}%</p>
-    </div>
-    {% endif %}
-
-    {% if error %}
-    <div class="mt-4 alert alert-danger">
-        <strong>Error:</strong> {{ error }}
-    </div>
-    {% endif %}
-</div> -->

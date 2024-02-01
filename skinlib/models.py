@@ -38,11 +38,12 @@ class Contact(models.Model):
     def __str__(self):
         return self.email
 
-# Models class for the uploaded image with his result  
-class Prediction(models.Model):
-    image = models.ImageField(upload_to='skinlib/')
-    predicted_class = models.CharField(max_length=255)
-    confidence = models.FloatField()
+
+# Models class for the uploaded image from User with the prediction result of Image  
+class Prediction(models.Model): # hier is a django model class, which the inheritance is from 'models.Model'
+    image = models.ImageField(upload_to='skinlib/') # for saving the image in media-file in the project
+    predicted_class = models.CharField(max_length=255) # for the prediction skin cancer label
+    confidence = models.FloatField() # for the percent of the prediction-image
 
     def __str__(self):
-        return f"{self.predicted_class} - {self.confidence}%"
+        return f"{self.predicted_class} - {self.confidence}%" # that will be display in Django-Administration-site 
