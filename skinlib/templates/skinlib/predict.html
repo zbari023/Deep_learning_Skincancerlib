@@ -66,15 +66,17 @@
                         <h5 class="my-3">Hautkrebsart: {{ prediction_obj.predicted_class}}</h5>
                         <h5 class="my-3">Das Hautbild ist: {{ prediction_obj.confidence|floatformat:2 }}%
                             {{ prediction_obj.predicted_class}}</h5>
-                        <h4 class="my-3 text-info">Ihre Daten werden an uns weitergeleitet und nur für den Zweck verwenden.
+                        <h4 class="my-3 text-info">Ihre Daten werden an uns weitergeleitet und nur für den medizinischen Zweck verwendet.
                             <i class="fa-solid fa-envelope-circle-check" style="color: #3f76b4;"></i>
                         </h4>
                     
-                        {% if prediction_obj.predicted_class == 'Basal cell carcinoma' or prediction_obj.predicted_class == 'Melanoma' or prediction_obj.predicted_class == 'Squamous cell carcinoma' %}
+                        {% if prediction_obj.predicted_class == 'Basal cell carcinoma' or prediction_obj.predicted_class == 'Melanoma' or prediction_obj.predicted_class == 'Squamous cell carcinoma' or prediction_obj.predicted_class == 'Actinic keratosis' %}
                             <div class="my-5 p-4 bg-danger border rounded">
                                     <h4 class="my-3 text-light">Achtung! Dieses Hautbild zeigt eine gefährliche Form von Hautkrebs!</h4>
                                 <h4 class="text-light">Bitte suchen Sie umgehend medizinischen Rat.</h4>
+                                <a class="my-2 text-light" href="https://www.11880.com/suche/hautarzt/bonn">Hautärzte & Dermatologen in der Nähe</a>
                             </div>
+
                         {% endif %}
                     </div>
                 {% endif %}
